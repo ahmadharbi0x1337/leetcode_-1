@@ -1,0 +1,6 @@
+#1 First Submission:
+
+slice() will throw a TypeError on (0,0) so we wolud have to modify to (0,1) , tested with reduce()
+initial Value of 0 , won't produce any errors because it's just setting an initial value(elemnt) of zero but we already know that there will be no-empty subArrays due to slice() logic we put earlier.
+
+Anyway , This Approach Seems to Be Not Suffiecient ("Time Limit Exceedd") , 150/167 test cases passed , 17 more to go , will look to the hints and topic and try to come with a better one . 
