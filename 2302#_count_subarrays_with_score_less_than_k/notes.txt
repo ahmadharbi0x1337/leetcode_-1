@@ -1,6 +1,67 @@
-#1 First Submission:
+#1 First Submission:[Failed]
+
+the code is working but unfourtunately it doesn't comply with the Time Complexity Efficiency 
+it's good for very much smaller constraints i guess and can be optimized for other data structures.
 
 slice() will throw a TypeError on (0,0) so we wolud have to modify to (0,1) , tested with reduce()
 initial Value of 0 , won't produce any errors because it's just setting an initial value(elemnt) of zero but we already know that there will be no-empty subArrays due to slice() logic we put earlier.
 
 Anyway , This Approach Seems to Be Not Suffiecient ("Time Limit Exceedd") , 150/167 test cases passed , 17 more to go , will look to the hints and topic and try to come with a better one . 
+
+
+--Code : 
+
+
+function countSubarrays(nums, k) {
+    let counter = 0;
+    for (let i = 0; i < nums.length; i++){
+        for (let j = 1; j <= nums.length - i; j++){
+            let subArray = nums.slice(i, i+j);
+            let sum = subArray.reduce((acc, curr) => {
+                return acc + curr;
+            },0);
+            let score = sum * subArray.length;
+            if (score < k){
+                counter++;
+            }
+        }
+    }
+    return counter;
+}
+
+
+
+
+#2 Second Submission:[Success]
+
+After A Simple Search And Looking to the hints and topics, and a very painful session to comprehend the logic, i figured out the sliding window with two pointers algorithm, the main part you should always don't forget is actually the very simple definition of an array which is contigous as we learned, the right and left pointers compare the current sum of the subarray by leveraging the fact that right and left pointers can represent the length of the subarray that is being tested for it's score.
+
+another hard part to grasp was how the current sum was decremeanting in corelation to the condition in the while loop in order to decrease the window.
+additionally that the left pointer should not ever exceeds the right one (that's intuitive but you get the idea)
+
+--Code:
+
+
+function countSubarrays(nums, k) {
+    let count = 0;
+    let left = 0;
+    let len = nums.length;
+    let currentSum = 0;
+    for (let right = 0; right < len; right++){
+        currentSum += nums[right];
+        while (currentSum * (right - left + 1) >= k && left <= right){
+            currentSum -= nums[left];
+            left++;
+        }
+        count += (right-left+1);
+    }
+    return count;
+
+  
+}
+
+
+
+
+
+**Closed.
