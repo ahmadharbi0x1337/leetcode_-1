@@ -1,0 +1,41 @@
+>>THE IDEA: You Can Create A Hash Table Where Keys Are The Elements Of The nums Array and the Values Are The Indices, Then You Can Immediately Check If The Corresponding Complement Element (( Which Is The Result Of " target - element " )) For Any Element In The nums Array does exist in the hash table by simply checking if the hash table will return true when trying to access that value , and if it's true you must also check that the index of the complement element is not the same element you are looking for it's complement. 
+
+#1 First Submission:[Failed]
+
+
+i immediately looked at the hints and topics, becasue i noticed at the end the possibility that you don't have to chekc linearly
+all the posibilities and you can avoid O(n^2).
+
+i could have used forEach, but in order to understand more about how to create and manipulate an object in js , i used the for loop for more simplicity.
+
+Forget To Check If The Indices Are Similar In Order To Prevent Adding The Same Element To it's own.
+
+just modified the condition to check that indices are different.
+
+#2 Second Submission:[Success]
+
+--Code:
+
+function twoSum(nums, target){
+	const hash = {};
+
+	for (let i = 0; i < nums.length; i++){
+		hash[nums[i]] = i;
+	}
+
+	let result = [];
+	
+	for (let j = 0; j < nums.length; j++){
+	
+		let complement = target - nums[j];
+		
+		if (hash[complement] && hash[complement] != j){
+			result.push(j, hash[complement]);
+			return result;
+		}
+	}
+}
+
+
+
+**Closed.
