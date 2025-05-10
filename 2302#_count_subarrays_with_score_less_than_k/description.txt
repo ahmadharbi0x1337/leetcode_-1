@@ -1,6 +1,5 @@
 2302. Count Subarrays With Score Less Than K
 
-
 The score of an array is defined as the product of its sum and its length.
 
 For example, the score of [1, 2, 3, 4, 5] is (1 + 2 + 3 + 4 + 5) * 5 = 75.
