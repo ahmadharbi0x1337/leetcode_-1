@@ -1,0 +1,36 @@
+>>>IDEA & APPROACH:
+The Problem is Fairly Simple , just a simple hash-table implementation , the only trick was is to ensure the proper increamnting , i did that by comparing the adjacences elements ( where left letter numerical value should not be less the the right adjacent to it and if it was then simply implement the formula they mentioned " right - left " , and skips to next iteration in order to avoid incrementing because you can't also yet return ) . Additional Notice , When Reaching the end of the string , i added a condition to check that s[i+1] != undefined in order to avoid possibal crashing in comparison , but it would work fine without , just a precaution.
+
+
+#1 Frist-Submission[Success]
+
+it was intuitive , basic , and fun , if you like this problem , try the scrabble problem in cs50x also , it's similar to it . 
+also this is a typical practice to remember basic mapping and cryptography . 
+
+
+
+
+
+--Code: 
+
+
+function romanToInteger(s){
+	let num = 0;
+	let hashm = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000,
+        };
+	for (let i = 0; i < s.length; i++){
+		if (hashm[s[i]] < hashm[s[i+1]]){
+			num += hashm[s[i+1]] - hashm[s[i]];
+			continue;
+		}
+		num += hashm[s[i]];
+	}
+	return num;
+}
