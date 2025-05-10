@@ -34,3 +34,5 @@ function romanToInteger(s){
 	}
 	return num;
 }
+
+**Closed.
