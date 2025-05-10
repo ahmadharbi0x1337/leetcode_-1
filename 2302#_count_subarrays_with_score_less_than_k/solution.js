@@ -13,3 +13,4 @@ var countSubarray = function(nums, k) {
 	}
 	return count;
 };
+
