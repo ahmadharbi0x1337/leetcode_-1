@@ -36,6 +36,4 @@ function twoSum(nums, target){
 	}
 }
 
-
-
 **Closed.
