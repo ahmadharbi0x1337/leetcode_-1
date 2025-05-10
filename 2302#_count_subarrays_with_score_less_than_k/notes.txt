@@ -1,5 +1,6 @@
 #1 First Submission:[Failed]
 
+
 the code is working but unfourtunately it doesn't comply with the Time Complexity Efficiency 
 it's good for very much smaller constraints i guess and can be optimized for other data structures.
 
@@ -33,6 +34,7 @@ function countSubarrays(nums, k) {
 
 
 #2 Second Submission:[Success]
+
 
 After A Simple Search And Looking to the hints and topics, and a very painful session to comprehend the logic, i figured out the sliding window with two pointers algorithm, the main part you should always don't forget is actually the very simple definition of an array which is contigous as we learned, the right and left pointers compare the current sum of the subarray by leveraging the fact that right and left pointers can represent the length of the subarray that is being tested for it's score.
 
