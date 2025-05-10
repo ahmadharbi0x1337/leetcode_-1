@@ -28,6 +28,7 @@ function romanToInteger(s){
 	for (let i = 0; i < s.length; i++){
 		if (hashm[s[i]] < hashm[s[i+1]]){
 			num += hashm[s[i+1]] - hashm[s[i]];
+			i++;
 			continue;
 		}
 		num += hashm[s[i]];
