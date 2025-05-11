@@ -1,0 +1,9 @@
+>>>IDEA
+it's a basic join tables in SQL, but honestly, i'm still figuring out the difference between different type of JOINS, basically LEFT JOIN allow you to output data even if it's null, but i didn't quite get from which table exactly but the solution works for now.
+and Another Idea i obtained is that you can specify immediately which columns from which tables by : table1.column_name, table2.column_name,....etc FROM table1 LEFT JOIN table2 ON .........etc
+
+1#First Submission:[Success]
+
+--Script:
+
+SELECT Person.firstName, Person.lastName, Address.city, Address.state FROM Person JOIN Address ON Person.personId = Address.personId;
