@@ -1,0 +1,69 @@
+IMPORTANT : DON'T COPY/PASTE THE SOLUTION, THERE IS BETTER CODE THAN MINE.
+
+
+>>>IDEA , and Approach. 
+After Tackling with this Problem for more than 2 hours , and hitting dead ends, i realized that i got it all wrong, i though i have to really change the zeros, so i create a hash-table to store the zeros in each array alongside their indices, but unfourtanelty, that wasn't the case, the problem was simply telling in decetive manner that you only have to return the minSum of the two arrays if there are enough zeros in one of them or both to compensate one another, in other words, if the first or second array has no zeros let's say and if the second/first array has at least one zero, if we can achieve ARRAY1_SUM = ARRAY2_SUM, then just return the already bigger sum corresponding to the array we want round the smaller array to, but most of the real work is don'r by checking if there is enough zeros or not , are the bigger sum can be reach or not, for example: 
+IF ARRAY1_SUM = 10
+and ARRAY2_SUM = 7 
+and There is no zeros then there isn't anything we can do really so just return -1
+Example (2):
+IF Absolute_Value(ARRAY1_SUM - ARRAY2_SUM) IS LARGER THAN THE CONSTRAINTS, Hence Larger Than any Number We Can Replace By The Zeros in Total, Then Also Return -1 , because there isn't any number we could have replace by the zero(s) and still make
+ARRAY1_SUM = ARRAY2_SUM,
+and after doing that, there is a pretty method in the Math Object in the javascript that basically return the bigger number which is Math.max(...numbers), just use it to return the sum of the bigger sum array.
+
+And That's it, phew !
+
+#1 First and Second Submission:[Failure]:
+Turns Out The Constraints Are Not Properly Defined in the Description, They Should Modify it To Make it 10^9, becuase one test case was 10^7 and the other was 10^9. that's why failed. 
+
+
+#2 Third Submission:[Success]:
+Just One More Notice For You Dear Reader, You Can Find A Better Version of the solution, because my solution does unnecessary Things, Like Enumerating All The Zeros and placing them in a hash-table, turns-out as i said earlier it's not really important , you could just calculate the number of zeros for each array instead, i just left them as they are for future to remember things.
+
+
+--Code:
+function minEqualSum(nums1, nums2) {
+    // Calculating the Sum of Arrays And Storing Zero's with their quantity
+    let arr1_z = {};
+    let arr2_z = {};
+    let arr1_zx = 0;
+    let arr2_zx = 0;
+    let arr1_sum = nums1.reduce((acc, cv, index) => {
+        if (cv === 0){
+            arr1_z[index] = 0;
+            arr1_zx++;
+        }
+        return acc + cv;
+    }, 0
+    );
+    let arr2_sum = nums2.reduce ((acc, cv, index) => {
+        if (cv === 0){
+            arr2_z[index] = 0;
+            arr2_zx++;
+        }
+        return acc + cv;
+    }, 0
+    );
+
+    diff = Math.abs(arr1_sum - arr2_sum);
+
+    z_more = arr1_zx > arr2_zx ? arr1_zx : arr2_zx;
+
+    if (diff > 0 && z_more === 0){
+        return -1;
+    }
+
+    let minSum1 = arr1_sum + arr1_zx;
+    let minSum2 = arr2_sum + arr2_zx;
+
+    if (minSum1 === minSum2) return minSum1;
+
+    let z_available = (minSum1 < minSum2) ? arr1_zx : arr2_zx;
+
+    if ((z_available === 0) && (minSum1 != minSum2)) return -1;
+
+    if (diff > z_available * 999_999_999) return -1;
+
+    return Math.max(minSum1, minSum2) + diff;
+}
+
