@@ -1,0 +1,14 @@
+Basically This Is Inuitive, Just Scan Through The Array Linearly and Return True If 3 back-to-back numbers are odds , meaning num % 2 != 0 , otherwise return false lastly if fails to meet the condition off-course.
+
+#1 First Submission:[Success]
+
+--Code:
+
+function threeConsecutiveOdds(nums){
+	for (let i = 0; i < nums.length - 2; i++){
+		if (nums[i] % 2 != 0 && nums[i+1] % 2 != 0 && nums[i] % 2 != 0){
+			return true;
+		}
+	}
+	return false;
+}
