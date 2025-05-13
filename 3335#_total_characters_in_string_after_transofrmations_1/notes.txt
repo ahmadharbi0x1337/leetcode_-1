@@ -1,0 +1,145 @@
+>>>IDEA:
+Honestly i went back and forth for a lot of time on this problem, it's not hard as an idea but the implementation has very different approach, and most of them has Time Limit Exceeded, Meaning The Code Was Working but failed to keep it's runtime within the range specified by the advanced test cases. , i did learned a lot from each failure, each approach was having a unique method, with a subtle differences.
+
+
+#1 First Submission:[Time Limit Exceeded]
+
+apparently the method is working, yet again another error with time limit exceeded, i didn't want to make things complex , i just created a duplicate array of the string and in each iteration of t i was constantly splitting and re-joining the array in order to get the new length and making all the characters in the array as one character in order to avoid z being ab having one index , well apparently this method is not efficient enough so moving towards another , 
+502/824 test cases passed , 322 test cases to beat !!!.
+
+
+-- Code: 
+
+function lengthAfterTransformations(s, t){
+    let arr = s.split("");
+    for (let i = 0; i < t; i++){
+        for (let j = 0; j < arr.length; j++){
+            if (arr[j].charCodeAt(0) === 122){
+                arr[j] = "ab";
+            }
+            else{
+                arr[j] = String.fromCharCode((arr[j].charCodeAt(0))+1)
+            }
+        }
+        arr = arr.join("").split("");
+    }
+    return arr.length;
+}
+
+
+
+
+
+
+
+
+#2 Second Submission:[Time Limit Exceeeded]
+
+after spending an hour trying to figure out the approach and asking A.I to Explain in details , i figured out somethings: 
+
+(1) new Map() : we are basically creating an object, but the Map Object and hold keys of any type , meaning it can store keys as any type rather than ordinary objects which store keys either as strings or Symbols, additionally the Map() maintain Insertion Order unlike {} which can sometimes have unexpected behavior, Moreover the Map() has a built-in size tracker, meaning it has a variable to track size meanwhile the {} doesn't and you could just do Object.keys(obj).length , but then you are consuming more memory because you are actually iterating each time through the whole object to find it's length.
+
+all of this heavy lifting just to understand why A.I used new Map(), instead of simply using {},
+
+okay fewwww!! 
+
+(2) then i examined the function getLength() , and i figured out a couple of things too:
+
+firstly the function takes 2 parameters which are the character and the number of transformations, 
+then it see if we already have that character in our Map() we created in order to avoid unnecessary calculations and just return the result immediately, 
+and if it's not then  also checks if number of transformations is 0 to return 1 which is the base case for the recursive calls, then we check if the char is z and if it's not we take it to the other option, either ways we will do the recursive calls as long as number of transformations is greater than zero and on each call off-course we add the result modulo 10^9 + 7  as per the problem description in order to avoid large numbers, and lastly we add the key which is the char and the result which is the number of transformation we did on that char to the Map() we created previously 
+finally we return the result . 
+
+
+(3) the main loop , just looping through the whole string and applying the function getLength(char, t) for each character in it alongside the number of transformations, and we defined a total which is the initial length and we keep incrementing according to the formula:
+
+length = 0
+
+length = (length + getLenght(char, t)) % MOD 
+
+where MOD is 1e9 + 7 
+and getLength will return finally the length of the character after applying t transformations on it 
+
+
+--Code:
+
+function lengthAfterTransformations(s, t){
+    const MOD = 1e9 + 7;
+    const memo = new Map();
+
+    function getLength(char, timeLeft) {
+        const key = char + ',' + timeLeft;
+        if (memo.has(key)) return memo.get(key);
+
+        if (timeLeft === 0) return 1;
+
+        let result;
+        if (char === 'z') {
+            // 'z' → "ab"
+            result = (getLength('a', timeLeft - 1) + getLength('b', timeLeft - 1)) % MOD;
+        } else {
+            const nextChar = String.fromCharCode(char.charCodeAt(0) + 1);
+            result = getLength(nextChar, timeLeft - 1);
+        }
+
+        memo.set(key, result);
+        return result;
+    }
+
+    let total = 0;
+    for (const ch of s) {
+        total = (total + getLength(ch, t)) % MOD;
+    }
+
+    return total;
+}
+
+
+
+
+
+
+
+
+
+#3 Third Submission:[Success] 
+
+i honestly also though this would be time limit exceed as well, but apparently O(26. t) is acceptable here . 
+
+this approach is actually a bit advanced than my first approach and a lot easier than the second approach , 
+
+the idea is to have an object where we store all the characters alongside their frequency (number of appearance) in the string , then we have two loops 
+the outer loop is iterating  t times and the inner loop is iterating 26 times 
+on each outer iteration we create a new frequency object and on each  inner iteration we set the count variable which is the number of frequency for a character at newFreq[j] , then we simply do the transformation and add the result of transformation to the newFreq, Hence we are not recreating the whole string and going back and forth to turn it into an array and then to a string , we are creating a duplicate freq Object with update frequency on each iteration , and lastly we use the reduce function to calculate the frequency of each character and simply return it . 
+
+
+--Code:
+
+function lengthAfterTransformations(s, t){
+    const MOD = 1e9 + 7;
+
+    let freq = Array(26).fill(0);
+    
+    for (let char of s) {
+        freq[char.charCodeAt(0) - 97]++;
+    }
+
+    for (let i = 0; i < t; i++) {
+        let newFreq = Array(26).fill(0);
+
+        for (let j = 0; j < 26; j++) {
+            let count = freq[j];
+
+            if (j === 25) { // 'z'
+                newFreq[0] = (newFreq[0] + count) % MOD; // 'a'
+                newFreq[1] = (newFreq[1] + count) % MOD; // 'b'
+            } else {
+                newFreq[j + 1] = (newFreq[j + 1] + count) % MOD;
+            }
+        }
+
+        freq = newFreq;
+    }
+
+    return freq.reduce((sum, count) => (sum + count) % MOD, 0);
+}
