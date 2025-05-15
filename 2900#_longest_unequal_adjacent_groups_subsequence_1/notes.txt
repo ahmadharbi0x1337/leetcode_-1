@@ -1,0 +1,78 @@
+>>>IDEA: 
+Return The Longest SubSequence Of Alternating Bits, NOT NECESSERLY CONSECUTIVE, just push the differen words[i] if thier corresponding bits is different from the previous one. 
+
+
+
+
+
+
+
+#1 First Submission:[Failure]
+so basically i did a try an idea , i tried to calculate the longest subsequent alternating binaries by simply going through the groups array and assigning a left and right pointer, but it seems that there was a huge logic flaw and i demonstrated a fantastic stupid idea to handle the one length array. 
+
+14/382 test cases passed , 368 to go .
+
+
+--Code 
+
+function getLongestSubsequence(words, groups){
+
+    let left = 0;
+    let right = 0;
+    let initLen = 0;
+    let len = 0;
+    if (groups.length > 1){
+        for (let i = 0; i < groups.length - 1; i++){
+            if (groups[i] !== groups[i+1]){
+                initLen++;
+            }else{
+                if (initLen <= len){
+                    initLen = 0;
+                    right = i;
+                    left = (groups.length - (groups.length - right)) - initLen;
+                }else{
+                    len = initLen;
+                    initLen = 0;
+                    right = i;
+                }
+            }
+        }
+    
+        let l = [];
+        for (let i = left; i < right; i++){
+        l.push(words[groups[i]]);
+        }
+        return l;
+    }else{
+        return words;
+    }
+}
+
+
+
+
+
+
+#2 Second Submission:[Success]
+
+so another trivial notice i should always remember, not every sequence means consecutive, apparently they didn't want a consecutive sequence, which if i really payed enough attention to the example 1, i would have know that, the approach of the solution seems to be far simpler than my previous one, just push if the corresponding bit is different from the previous , THAT's IT !!!
+
+--Code
+
+
+function getLongestSubsequence(words, groups){
+
+    let result = [];
+    let last = -1;
+    for (let i = 0; i < words.length; i++){
+        if (result.length === 0 || groups[i] !== last){
+            result.push(words[i]);
+            last = groups[i];
+        }
+    }
+    return result;
+}
+
+
+
+
