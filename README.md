@@ -1,12 +1,20 @@
-# leetcode_-1
-Leetcode Progress Tracker . Box_No.1.
-First Repo For The Leetcode Problems , When Reaching Repo Limit Will Create Another Repo Under Same Name , Different Number For Consistency.
-Here I Will Be Sharing My Leetcode Problems I Solve , There Will Be No Categorization.
-I Will Append A Description,notes, and solution files alongside each problem folder.
-Feel Free To Explore, Learn, and Share my codes.
-Have A Nice Day.
+
+# LeetCode Solutions
+
+Welcome to my LeetCode solutions repository! Here you'll find my JavaScript implementations for various LeetCode problems.
+
+## About This Repository
+
+This repository is intended to serve as a learning resource and a showcase of my problem-solving skills. Each problem has its own directory containing the problem description, my notes, and the JavaScript solution.
+
+## LeetCode Problem Solutions
+
+## Contact
+
+Feel free to reach out if you have any questions or suggestions!
+
+
+
 Peace Out ✌️
 
-
-WILL BE ADDING A SCRIPT TO LIST ALL THE PROBLEMS I SOLVED IN SEQUENCED TO PROBLEMS NUMBERS IN THE FUTURE IN THIS README FILE 
 

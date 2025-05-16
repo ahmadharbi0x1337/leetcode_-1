@@ -1,0 +1,73 @@
+name: Update LeetCode Solutions List # A descriptive name for your workflow
+
+on: # Defines the events that will trigger this workflow
+  push:
+    branches: [main] # Run this workflow whenever code is pushed to the main branch
+  workflow_dispatch: # Allows you to manually trigger this workflow from the GitHub Actions UI
+
+jobs: # A workflow run is made up of one or more jobs
+  generate_readme: # A unique identifier for this job
+    runs-on: ubuntu-latest # Specifies the type of machine to run the job on
+    steps: # A job contains a sequence of tasks called steps
+      - name: Checkout repository # A descriptive name for the step
+        uses: actions/checkout@v3 # Uses the official GitHub action to checkout your repository code
+
+      - name: Set up Node.js # A descriptive name for the step
+        uses: actions/setup-node@v3 # Uses the official GitHub action to set up the Node.js environment
+        with:
+          node-version: '16' # Specify the Node.js version you want to use (you can adjust this)
+
+      - name: List and transform folder names # A descriptive name for the step
+        id: list_folders # An ID to reference the outputs of this step
+        run: | # Executes the following commands using the runner's shell
+          const fs = require('fs');
+          const path = require('path');
+
+          function transformFolderName(folderName) {
+            const parts = folderName.split('#');
+            if (parts.length!== 2) {
+              return folderName; // Handle cases where '#' might be missing
+            }
+            const number = parts;
+            const wordsPart = parts[1];
+            const words = wordsPart.split('_').map(word => {
+              if (word.length > 0) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+              }
+              return ''; // Handle potential empty words after split
+            });
+            return `<span class="math-inline">\{number\}\.</span>{words.join('')}`;
+          }
+
+          const problemDirs = fs.readdirSync('.')
+          .filter(file => fs.statSync(file).isDirectory() && /^\d+#/.test(file));
+
+          const transformedList = problemDirs.map(dir => {
+            const transformedName = transformFolderName(dir);
+            return `- [<span class="math-inline">\{transformedName\}\]\(</span>{dir})`;
+          }).join('\n');
+
+          const readmePath = path.join(__dirname, 'README.md');
+          let readmeContent = fs.readFileSync(readmePath, 'utf8');
+
+          const startMarker = '';
+          const endMarker = '';
+          const startIndex = readmeContent.indexOf(startMarker);
+          const endIndex = readmeContent.indexOf(endMarker);
+
+          if (startIndex!== -1 && endIndex!== -1) {
+            const before = readmeContent.substring(0, startIndex + startMarker.length);
+            const after = readmeContent.substring(endIndex);
+            const newContent = `<span class="math-inline">\{before\}\\n</span>{transformedList}\n${after}`;
+            fs.writeFileSync(readmePath, newContent);
+          } else {
+            console.error('Markers not found in README.md');
+          }
+          console.log('::set-output name=readme_updated::true'); # Sets an output variable for this step
+
+      - name: Commit and push changes # A descriptive name for the step
+        if: steps.list_folders.outputs.readme_updated == 'true' # Only run this step if the README was updated
+        uses: stefanzweifel/git-auto-commit-action@v4 # Uses a community action to automatically commit and push changes
+        with:
+          commit_message: "docs: Update LeetCode solutions list in README" # The commit message for the changes
+          push_options: "--force-with-lease" # Recommended option for safer pushing
