@@ -38,7 +38,7 @@ This repository is intended to serve as a learning resource and a showcase of my
 
 ${problems.map((p) => {
   const encodedDir = encodeURIComponent(p.dir);
-  return ` [${p.number}. ${p.title}](${encodedDir})`;
+  return ` [${p.number}. ${p.title}](${encodedDir})\n`;
 }).join('\n')}
 
 ---
