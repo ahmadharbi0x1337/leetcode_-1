@@ -1,0 +1,28 @@
+>>>IDEA: i really forget what is the name of the problem that we also used this method in, but i figured since the constraints is only 3 numbers (meaning the space complexity is not that big), why won't we create a simple dict where the keys are [0, 1, 2], and the values are their frequency, then we would only have to go through the array once, and collect this information and put it in our simple hash-table, then we would got for each key of those in order offcourse to loop again in order to assign it for the times of it's frequnecy, i think i'm using the hash-table in the wrong way here because even though the method is nice it's still O(n^2), they also said in the follow-up if we can come up with a one pass time algorithm to sort them, i didn't figure out it yet, maybe in the future?!.
+
+
+
+
+
+#First Submission:[Success]
+
+
+--Code:
+
+function sortColors(digits) {
+
+    const freq = {0:0, 1:0, 2:0};
+    for (let num of nums){
+        freq[num]++;
+    }
+    
+    let index = 0;
+    for (const key of [0, 1, 2]) {
+        const count = freq[key] || 0;
+        for (let i = 0; i < count; i++) {
+            nums[index] = Number(key);
+            index++;
+        }
+    }
+
+}
