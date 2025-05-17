@@ -1,0 +1,9 @@
+>>>IDEA: the idea here is also fairly simple, you just have to group the duplicate rows and count the ones that exceeds 1
+
+
+
+
+--Script:
+
+SELECT email FROM Person GROUP BY email HAVING COUNT(*) > 1;
+
