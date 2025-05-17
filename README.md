@@ -19,17 +19,29 @@ This repository is intended to serve as a learning resource and a showcase of my
 ## 📚 Problems List
 
  [1. Two Sum](1%23_two_sum)
+
  [13. Roman To Integer](13%23_roman_to_integer)
+
  [1550. Three Consecutive Odds](1550%23_three_consecutive_odds)
+
  [175. Combine Two Tables](175%23_combine_two_tables)
+
  [182. Duplicate Emails](182%23_duplicate_emails)
+
  [2302. Count Subarrays With Score Less Than K](2302%23_count_subarrays_with_score_less_than_k)
+
  [2900. Longest Unequal Adjacent Groups Subsequence 1](2900%23_longest_unequal_adjacent_groups_subsequence_1)
+
  [2918. Minimum Equal Sum Of Two Arrays After Replacing Zeros](2918%23_minimum_equal_sum_of_two_arrays_after_replacing_zeros)
+
  [3335. Total Characters In String After Transofrmations 1](3335%23_total_characters_in_string_after_transofrmations_1)
+
  [66. Plus One](66%23_plus_one)
+
  [75. Sort Colors](75%23_sort_colors)
+
  [9. Palindrome Number](9%23_palindrome_number)
+
 
 ---
 
