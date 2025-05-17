@@ -5,7 +5,7 @@ const path = require('path');
 // Get all directories
 const entries = fs.readdirSync('.', { withFileTypes: true });
 const problemDirs = entries
-  .filter(entry => entry.isDirectory() && /^\d+#_/.test(entry.name));
+  .filter(entry => entry.isDirectory() && /^\d+%_/.test(entry.name));
 
 const formatName = (dirName) => {
   const [numberPart, ...rest] = dirName.split('#_');
@@ -39,7 +39,7 @@ This repository is intended to serve as a learning resource and a showcase of my
 
 ## 📚 Problems List
 
-${problems.map((p, i) => `${i + 1}. [${p.number}. ${p.title}](${p.dir})`).join('\n')}
+${problems.map((p) => ` [${p.number}. ${p.title}](${p.dir})`).join('\n')}
 
 ---
 
