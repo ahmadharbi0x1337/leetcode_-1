@@ -1,11 +1,10 @@
 // generate-readme.js
 const fs = require('fs');
-const path = require('path');
 
 // Get all directories
 const entries = fs.readdirSync('.', { withFileTypes: true });
 const problemDirs = entries
-  .filter(entry => entry.isDirectory() && /^\d+%_/.test(entry.name));
+  .filter(entry => entry.isDirectory() && /^\d+#_/.test(entry.name));
 
 const formatName = (dirName) => {
   const [numberPart, ...rest] = dirName.split('#_');
@@ -23,7 +22,6 @@ const readmeContent = `# 🧠 LeetCode Solutions in JavaScript
 
 Welcome to my leetcode solutions repository! Here you'll find my JavaScript implementations for various LeetCode problems.
 
-
 Each problem has its own directory containing:
 
 - \`description.txt\`
@@ -34,12 +32,14 @@ Each problem has its own directory containing:
 
 ## About This Repository
 
-This repository is intended to serve as a learning resource and a showcase of my problem-sloving skills.
-
+This repository is intended to serve as a learning resource and a showcase of my problem-solving skills.
 
 ## 📚 Problems List
 
-${problems.map((p) => ` [${p.number}. ${p.title}](${p.dir})`).join('\n')}
+${problems.map((p) => {
+  const encodedDir = encodeURIComponent(p.dir);
+  return ` [${p.number}. ${p.title}](${encodedDir})`;
+}).join('\n')}
 
 ---
 
