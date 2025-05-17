@@ -1,0 +1,51 @@
+>>>IDEA: it's a simple problem, you just need to increment the last number, the only issue lies if the number was 9, then you will have to deal with it such that you increment before it by 1 and turn the last number to 0, another problem is that if incrementing will increase the array size is that you have to deal with it too by adding an element to the beginning becuase the array will only increase in the case of all numbers of the array are 9's, i just used the unshift function in javascript. which brought to my attention at the time, does unshift doesthe underlying process of C in reversed linked-list, and the answer is yes, just like you have to move every element in a linked list in C in order to make the last inserted element to be the first in the list, unshift does the same, firstly it assigins an additional array length, then moving each element by one and lastly insert the new element in the empty index. 
+
+
+#First Submission:[Failed]
+
+well i didn't know that until i faced this problem but it turns out that the unshift function doesn't actually return the modified array in-place, it modifies it yes, but it actually return the length of it, that's why the first submission failed.
+
+
+
+--Code:
+
+function plusOne(digits) {
+	let n = digits.length;
+	for (let i = n-1; i >= 0; i--) {
+		if (digits[i] < 9) {
+			digits[i]++;
+			return digits;
+		}
+
+		digits[i] = 0;
+	}
+
+	return digits.unshift(1); // This was the wrong part because it will return the length, not the modified array in-place.
+}
+
+
+
+
+
+
+#2 Second Submission:[Success]
+
+function plusOne(digits) {
+	
+	let n = digits.length;
+	for (let i = n-1; i >= 0; i--) {
+		if (digits[i] < 9) {
+			digits[i]++;
+			return digits;
+		}
+
+		digits[i] = 0;
+	}
+
+	digits.unshift(1);
+	return digits;
+
+}
+
+
+
