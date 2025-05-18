@@ -1,0 +1,76 @@
+>>>IDEA: the problem require to find the longest common prefix for ALL of the strings within the strings array.
+
+i saw an idea to sort the array alphabateically and then pick the smalles and longest strings from it and compare them, this approach turns out to be honestly not as smart as you would think it is.
+becuase it will take the same time to sort as if you would check all the strings by O(n^2). weather in worst or best case scenario, because the sort function will still need to CHECK. if the elements are sorted, even if they are sorted. and if not it will need to sort, then will take an extra time.
+
+
+1# First Submission:[Failed]
+
+Suprisingly i came up with a much more ridicolus approach and realized why the sort needs to be alphabetically!?,
+
+i had an idea of like two pointers thing to go through the array once and assign only the smallest string and the biggest one without sorting, But unfourtenately i had an error, because although maybe the logic is straight forward and simple, but it will fail if there are two strings with same length like "flower" and "flight" and the smallest one will be similar to flower by 3 chars, but not to flight.
+
+
+
+--Code
+
+function longestCommonPrefix (strs) {
+
+    if (strs && strs.length > 0){
+        let smallest_str = strs[0];
+        let biggest_str = strs[0];
+        
+	for (let i = 1; i < strs.length; i++){
+            if (strs[i].length > biggest_str.length){
+                biggest_str = strs[i];
+            }
+            if (strs[i].length < smallest_str.length){
+                smallest_str = strs[i];
+            }
+        }
+        let longest_prefix = '';
+        for (let j = 0; j < smallest_str.length; j++){
+            if (smallest_str[j] == biggest_str[j]){
+                longest_prefix += smallest_str[j];
+            }
+            else{
+                break;
+            }
+        }
+        return longest_prefix;
+    }
+    else{
+        return '';
+    }
+}
+
+
+
+
+
+2# Second Submission:[Success]
+
+finally since i realized that the sorting will take time and my appraoch is ridicolus, i brute force the solution but it still takes less time actually than sorting, becasue once it finds the difference it will immedeatiley return, and turns out you don't even have to sort, you can just pick an arbitrary string to compare all the others to, becasue remember what the problem said - COMMON PREFIX - means it should be identical across all strings.
+
+And I mean yeah in theory maybe the sorting method and the brute force method are O(n^2) but the sorting method will take exactly O(n^2) to sort or to check , and then will take O(n) to compare the strings, while this brute force method in this particular context it may take O(1) in the best case. 
+
+
+--Code
+
+
+
+function longestCommonPrefix (strs) {
+
+    if (!strs.length) return '';
+    let prefix = '';
+    for (let i = 0; i < strs[0].length; i++){
+        let char = strs[0][i];
+        for (let k = 1; k < strs.length; k++){
+            if (i > strs[k].length || strs[k][i] !== char){
+                return prefix;
+            }
+        }
+        prefix +=  char;
+    }
+    return prefix
+}
