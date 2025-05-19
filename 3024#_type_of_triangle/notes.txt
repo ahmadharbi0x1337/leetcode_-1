@@ -1,0 +1,32 @@
+>>>IDEA: i stumbled upon many typos and actual logic flaws because i though this one is easy one, it actually is, But i just rushed it, basically the idea is that you can sort the array - this step is only important in order to figure out wheather we can form a triangle or not - becasue the math tells that any the biggest side of a triangle has to be smaller than the sum of the other sides, then you just check for the conditions one by one.
+
+
+
+# Like i said multiple Submissions Failed because i just rushed it so here is the code 
+
+
+--Code
+
+function triangleType (nums){
+	for (let i = 0; i < nums.length-1; i++){
+		if (nums[i] > nums[i+1]){
+			let tmp = nums[i];
+			nums[i] = nums[i+1];
+			nums[i+1] = tmp;
+		}
+	}
+
+	if (nums[2] >= nums[0]+nums[1]) return 'none';
+
+	if (nums[0] === nums[1] && nums[1] === nums[2]){
+		return 'equilateral';
+	}
+	else if (nums[0] === nums[1] || nums[0] === nums[2] || nums[1] === nums[2])
+		return 'isosceles';
+	else{
+		return 'scalene';
+	}
+}
+
+
+
