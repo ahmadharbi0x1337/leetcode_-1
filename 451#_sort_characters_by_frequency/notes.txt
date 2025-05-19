@@ -1,0 +1,29 @@
+>>>IDEA: 
+i had the idea but i didn't know how to sort the dict exactly, so i asked  Gemini, and after a couple of minutes reviewing the code, i figured that the sort function essentially is just destructing the elements of the passed parameters, off-course that's according to the nature of the passed parameters and how you want to destruct them, the syntax is actually a little weird for the sort function, because the comma (,) means to ignore this element of the array and moreover the freqB - freqA means to sort in decreasing order, there is actually a bunch of option which i can't remember off-course , But the overall logic is fairly simple, you just need to build the object from that one time pass through the string, then you have - which is the hard part i guess  - to sort the object based on the frequency, then finally return the new string after off-course looping on the sorted object and appending the chars one by one repeated with their number of frequency. 
+
+
+
+1# First Submission:[Success]
+
+
+
+--Code:
+
+function frequencySort (s) {
+    
+    let freq = new Map();
+    
+    for (let char of s){
+        freq[char] = (freq[char] || 0) + 1;
+    }
+    
+    const sortedChars = Object.entries(freq).sort(([, freqA], [, freqB]) => freqB - freqA);
+    
+    let result = "";
+
+    for (const [char, freq] of sortedChars){
+        result += char.repeat(freq);
+    }
+    
+    return result;
+}
