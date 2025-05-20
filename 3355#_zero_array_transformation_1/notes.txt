@@ -1,0 +1,82 @@
+>>>IDEA: yeah mate you won't solve this one linear because it will be O(n.k), 
+honestly i just sat for half an hour reading the codeforces blog post about this problem - although the post is like 5 min at best reading - but i couldn't honestly comprehend the logic, until finally i made ChatGPT break it for me like if was debugging, even with that i still don't fully understand the purpose of the prefix sum other-than that it's just basically an initial trigger value, 
+alright enough small talk, let's dive into the main logic:
+
+firstly we start by creating a difference array with size of n+1, - where n is the length of nums - secondly we loop over the queries array and add 1 to the l index and -1 to the index after r if r + 1 is smaller than n - meaning it's not out of band or in this case the range is not larger than the length - 
+
+Why we add 1 to l index and -1 to the index after the r+1
+think of it as Marks just to know where the range is starting and where it ends
+
+then we create another array coverage with size of n also, 
+we initiate the first value to be coverage[0] = difference[0]
+then we loop over the array and start incrementing by the accumelator like this
+coverage[i] = coverage[i-1] + difference[i]
+
+now when we loop like this , all the indices between the marked 1 and -1 will get added according to the difference and the accumelator which is the previous coverage "coverage[i-1]" , now the -1 comes in handy to stop the incrementing , 
+when you reach a negative element and add it , this will end the range and start a new one and additionally the remaining positive values will increment this element by the starting range of it - if there is one off course - . 
+
+
+phew, that was a really hard problem, it didn't seem to be this complicated at first sight. 
+
+
+1# First Submission:[Failed]
+
+
+
+well apparently this idea was a very over simplification for the problem, i though it was easy and went for an intuitive approach, but turns out this problem is quite difficult to grasp. 
+
+the math behind it is actually very elegant, and yet somehow confusing - at least i think so !! 
+
+
+--Code:
+
+function isZeroArray(nums, queries) {
+    
+    for (let i of queries){
+        nums[i[0]]--;
+        nums[i[1]]--;
+    }
+    for (let i = 0; i < nums.length; i++){
+        if (nums[i] !== 0) return false;
+    }
+    return true;
+}
+
+
+
+2# Second Submission:[Success]
+
+The Notes For This one is the IDEA 
+
+
+
+--Code:
+
+
+function isZeroArray(nums, queries) {
+
+	let n = nums.length;
+
+	let diff = new Array(n+1).fill(0);
+
+	for (let [l, r] of queries) {
+		diff[l]++;
+		if (r+1 < n) diff[r+1] -= 1;
+	}
+
+	const coverage = new Array(n);
+
+	coverage[0] = diff[0];
+
+	for (let i = 1; i < n; i++) {
+		coverage[i] = coverage[i-1] + diff[i];
+	}
+
+	for (let i = 0; i < n; i++) {
+		if (nums[i] > coverage[i]) {
+			return false;
+		}
+	}
+
+	return true;
+}
