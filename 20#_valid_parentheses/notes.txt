@@ -1,0 +1,71 @@
+>>>IDEA: the logic is pretty intuitive here, the only trick was that the keys was the closing parentheses in my case - pretty stupid i know - anyway the idea is to have an empty stack initially, and an object (AKA hash-table) which will store the closing parentheses as keys and the values off-course are the open ones, then you will iterate through the string and check if each char (every parenthese) is a closed or open one, if it's open then simply push it to your stack, if it's a closing one, then you will have to check if the last pushed parantheses was the right open for it, if it's not off-course we will return false, BUT there is a notice, there is a test case where you have only 1 bracket in the input, and our logic here doesn't cover how to deal with that , so eventually you should return true if the length of the stack is empty only.
+
+
+
+#1 First Submission:[Failed]
+
+failed becasue of the edge case i talked about earlier, i was returning true instead of the length of the stack
+
+
+--Code:
+
+
+function isValid(s) {
+    const stack = [];
+    let map = {
+        ')':'(',
+        '}':'{',
+        ']':'[',
+    };
+
+    for (let char of s){
+        if (char in map){
+            const top = stack.pop()
+            if (top !== map[char]){
+                return false;
+            }
+        }else{
+            stack.push(char);
+        }
+    }
+
+    return trur; // Here is the mistake
+
+}
+
+
+
+
+
+2# Second Submission:[Success]
+
+
+
+
+--Code: 
+
+
+
+
+
+function isValid(s) {
+
+    const stack = [];
+    let map = {
+        ')':'(',
+        '}':'{',
+        ']':'[',
+    };
+
+    for (let char of s){
+        if (char in map){
+            const top = stack.pop()
+            if (top !== map[char]){
+                return false;
+            }
+        }else{
+            stack.push(char);
+        }
+    }
+    return stack.length === 0;
+}
