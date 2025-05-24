@@ -1,0 +1,59 @@
+the solution is fairly a very simple regulra expression, the bash shell makes it even easier, you just need to look up the syntax.
+
+we will just use the grep command with the -e flag which means look for this pattern, you can use multiple -e to define different patterns off course, as the following:
+
+$grep [-e <RegExp/Pattern> -e <RegExp/Pattern> ......etc] filename
+
+
+Now Regular Expression Syntax Explanation in Bash:
+
+^....$
+
+Where ^ : means beginning of line
+and $ : means end of line
+and ... : is the pattern we will define
+
+
+Now Some Patterns Examples And Syntax Also:
+
+[...] : means any ONE character in the set
+for example: [0-9] means any ONE digit between 0 and 9, or [a-z] means any ONE character from a to z lowercase exclusive.
+
+
+[^...] : measn ANY ONE character which is NOT in the set
+
+
+\ : Escape character
+
+
+{n} : number of repetitions
+
+
+(...) : grouping
+
+
+
+
+
+
+SOLUTION EXPLANATION:
+
+grep -e '^[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}$' -e '^(\([0-9]\{3\}\))[ ]\{1\}[0-9]\{3\}-[0-9]\{4\}$' file.txt
+
+
+
+first pattern : 
+
+[0-9]\{\3} : means exactly three digits and the dash is literal
+[0-9]\{\4} : i think you should now by now!!?
+
+second pattern :
+
+(\...\)) : the pattern inside is known by now, but the escape characters are put here to mean literal parantheses, in other words to escape grouping.
+
+
+[ ]\{\1}  : means to add exactly one space
+
+the rest is abvious by now i think.
+
+
