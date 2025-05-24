@@ -1,0 +1,70 @@
+>>>IDEA: the idea here is actually quite facinating, you don't have to iterate all the matrix every time you find a zero in one cell - which will result in O(mn) Space Complexity, instead the approach i looked it up and saw was really mind blowing it really changes the way you thing about iterating and how you could benefit from few variables to find the solution to many instead of wasting space, firstly you would go through the first row and column, and see if there are any zeroes in them, this step is crucialy important to make in Order, you will start with two variables, one for the row0 and col0 which are boolean data types, and like i said you will iterate through them to check if there are any zeroes in them, and if you find any, you will update the boolean values to be true, Now i want you to forget about them for aminute, and focus on the following, you will iterate through the array one time only to identify where the zeroes are located, BUT you will start from the second row and column, now if you find any cell that contains zero, you will ONLY update the corresponding cells for it that exist in the first row and column - X marks the spot , keep this phrase in your mind - , now after you finished the first iteration of the matrix and marked all the corresponding cells in the first row and column, your mission now is to create two nested loops that will iterate the whole matrix one final time, BUT here is the trick, the loops will zero any cell that corresponds to a zero cell in found either in the first row or column - again X marks the spot -, and the last thing is the booleans we did first , we need to check if they are true, then we will have to zero the first row or column if any of them is true, because the boolean true here means, the the first row was containing a zero even before we inserted the markers.
+
+
+That Was A lot phew!!, but honestly this is one of the most problems i enjoyed.
+
+
+
+
+#1 First Submission:[Success]
+
+
+--Code:
+
+function setZeroes(matrix) { 
+
+
+    let m = matrix.length;
+    let n = matrix[0].length;
+
+    let row0 = false;
+    let col0 = false;
+
+    // Check First Column
+    for (let i = 0; i < m; i++){
+        if (matrix[i][0] === 0){
+            col0 = true;
+        }
+    }
+
+    // Check First Row
+    for (let i = 0; i < n; i++){
+        if (matrix[0][i] === 0){
+            row0 = true;
+        }
+    }
+
+    // Use First Row And Col to mark the Zeros
+    for (let i = 1; i < m; i++){
+        for (let j = 1; j < n; j++){
+            if (matrix[i][j] === 0){
+                matrix[i][0] = 0;
+                matrix[0][j] = 0;
+            }
+        }
+    }
+
+    // Use Markers To Zeros all the cells
+    for (let i = 1; i < m; i++){
+        for (let j = 1; j < n; j++){
+            if (matrix[i][0] === 0 || matrix[0][j] === 0){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    // Zero the first row and column if necessary
+    // This step is crucial in order in order to not get conflicted
+
+    if (row0){
+        for (let i = 0; i < n; i++){
+            matrix[0][i] = 0;
+        }
+    }
+
+    if (col0){
+        for (let i = 0; i < m; i++){
+            matrix[i][0] = 0;
+        }
+    }
+}
