@@ -1,0 +1,21 @@
+>>>IDEA: basically this is a typicall Merge Sort Algorithm, we are using recursion to recursively traverse and compare the lists at the same time, the basic idea is that if the list1.val is bigger than list2.val then call the function recursively passing the next val of the list2, and return list2, vice versa when list1.val < list2.val.
+
+
+
+--Code:
+
+function mergeTwoLists(list1, list2) {
+
+	// Base Cases
+	if (!list1) return list2;
+	if (!list2) return list1;
+
+	if (list1.val > list2.val){
+		list2.next = mergTwoLists(list1, list2.next);
+		return list2;
+	}else{
+		list1.next = mergeTwoLists(list1.next, list2);
+		return list1;
+	}
+}
+
