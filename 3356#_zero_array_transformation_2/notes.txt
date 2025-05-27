@@ -1,0 +1,76 @@
+>>>IDEA: Basically The Same As The First Part ( Zero Array Transformation 1 ) 
+The Only Difference Here is That We Wrapped the difference and coverage logic in a helper function.
+Then We Are Doing A Simple Binary Search Starting From the middle of the queires, and we either decrease or increase the queries, based on the helper function result off-course.
+
+
+Additionally There is one edge case to this appraoch (or maybe my speceifc code) that was when the nums array is only zero, therefore k is zero, that's why the first submission was wrong.
+
+
+
+#1 First Submission:[Failed]
+
+
+--Code
+
+
+function minZeroArray (nums, queries) {
+	function canBeZero(nums, queris, k) {
+		let n = nums.length;
+		let diff = Array(n+1).fill(0);
+
+		for (let i = 0l i < k; i++){
+			let [l, r, val] = queries[i];
+			if (r+1 < n){
+				diff[r+1] -= val;
+			}
+		}
+
+		let coverage = Array(n);
+
+		coverage[0] = diff[0];
+		for (let i = 1; i < n; i++) {
+			coverage[i] = coverage[i-1] + diff[i];
+		}
+
+		for (let i = 0; i < n; i++) {
+			if (coverage[i] < nums[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+	let low = 1;
+	let high = n;
+	let answer = -1;
+
+	while (low <= high) {
+		let mid = Math.floor((low+high)/2)
+		if (canBeZero(nums, queries, mid) {
+			answer = mid;
+			high = mid - 1;
+		}else{
+			low = mid + 1;
+		}
+	}
+	return answer;
+}
+
+
+
+
+
+
+#2 Second Submission:[Success]
+
+-- Code:  it's The same code exactly, just we have to add the edge case condition checking.
+
+
+if (nums.every(x => x === 0)) return 0;
+
+
+just add this before anything, what the every() do exactly is it just iterate over all the array element, i could have wrote the stripped code, but this is nicer and cleaner.
+
+
+
