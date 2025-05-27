@@ -1,0 +1,21 @@
+>>>IDEA: now the topics suggests sorting, but i didn't use any sorting, the logic was pretty simple, just create any empty object, and loop over the array and check if the element is present (means this is the second occurence so immediately return true), if the element is not present just create it with a value of 1, lastly return false.
+
+
+
+--First Submission:[Success]
+
+
+--Code
+
+function containsDuplicate(nums) {
+	let freq = {};
+	for (let i = 0; i < nums.length; i++) {
+		if (freq[nums[i]]) {
+			return true;
+		}
+		if (!freq[nums[i]]) {
+			freq[nums[i]] = 1;
+		}
+	}
+	return false;
+}
