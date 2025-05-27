@@ -1,0 +1,21 @@
+>>>IDEA: the idea is fairly simple, and i almost forgot that we have something in programming called "control flow labels", yes my friend, those labels will be very handy when looping, because like this problem, what if i want to stop the loop the moment i get what i want, there is no need and no point in keeping the loop iterating right ?
+
+
+
+--First Submission:[Success]
+
+function findWordsContaining(words, x) {
+	let n = words.length;
+	let arr = [];
+
+	out:for (let i = 0; i < n; i++) {
+		let w = words[i];
+		for (let j = 0; j < w.length; j++) {
+			if (w[j] === x){
+				arr.push(i);
+				continue out;
+			}
+		}
+	}
+	return arr;
+}
