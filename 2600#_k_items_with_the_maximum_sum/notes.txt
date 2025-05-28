@@ -1,0 +1,23 @@
+>>>IDEA: it just about handling multiple situations with the right conditions.
+
+if k is smaller than numOnes, then MAX is k.
+if k is larger than numOnes and k minus numOnes is smaller than numZeros, then MAX is numOnes.
+else MAX is numOnes minus the left of k after subtracting from numOnes and numZeros
+
+
+
+#1 First Submission:[Success]
+
+
+
+--Code
+
+function kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k) {
+	if (k <= numOnes) return k;
+	if (k > numOnes && k-numOnes <= numZeros) {
+		return numOnes;
+	}else{
+		return (numOnes-(k-(numOnes+numZeros)));
+	}
+}
+
