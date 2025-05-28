@@ -1,0 +1,26 @@
+>>>IDEA: this problem is a typical modulo arithmetic,
+it's very basic but fun,
+you just need to loop through the range 1 to n and assign num1 as the collective sum of numbers whose modulo of m is not zero,
+then do the same thing for num2 but for modulo m is zero.
+then simply return num1-num2
+
+
+
+
+
+#1 First Submission:[Success]
+
+
+
+--Code
+
+function differenceOfSums(n, m) {
+	let num1 = 0;
+	for (let i = 1; i <= n; i++) {
+		if (i % m !== 0) {
+			num1 += i;
+		}else{
+			num2 += i;
+		}
+	}
+	return num1-num2;
