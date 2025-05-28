@@ -1,0 +1,42 @@
+>>>IDEAD: firstly, an anagram means a word that can be shaped out of the exact length and characters of the original word.
+example : cat is an angram of tac or act, but it's not for car or acts.
+you see one character difference is not permit.
+
+now the idead is simple, firstly check for the length
+then build a dict, and insert keys as characters and values as their frequeceny.
+next is to compate each char from s to each char from t, you also have to decrement the frequecny of the char.
+
+
+
+#1 First Submission:[Failed]
+
+I foreget to decrement the frequency 
+
+#2 Second Submission:[Failed]
+
+Syntax Error
+
+
+#3 Third Submission:[Success]
+
+
+--Code
+
+function isAnagram(s, t) {
+	if (s.length !== t.length) return false;
+	let obj = {};
+	for (let i of s) {
+		if (ob[i]){
+			obj[i]++;
+		}else{
+			obj[i] = 1;
+		}
+	}
+	for (let i of t) {
+		if (!obj[i]) {
+			return false;
+		}
+		if (--obj[i] === 0) delete obj[i];
+	}
+	return true;
+}
