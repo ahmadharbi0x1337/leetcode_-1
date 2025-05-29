@@ -1,0 +1,45 @@
+>>>IDEA: i like this kind of problems, it's fun and easy at the same time, although the label is hard, but believe me once you have the initial intuition for it, it's a cake, so my approach was the following:
+
+- I built a dictionary (hash-table), were i stored all duplicates anagrams in it, where the key represent the sorted word of the anagram, the value was a list of the indices of all anagrams for that word in the strs array.
+
+- Then i just iterate over the hash-table keys, then off-course another nested loop for the values, and pushed each string that maps to that index to the subArray inside the grouped array.
+
+
+
+
+#1 First Submission:[Success]
+
+
+--Code
+
+function(strs) {
+    // Building a dict containing the anagrams alongside the indices of them.
+    let freq = {};
+    let n = strs.length;
+    for (let i = 0; i < n; i++){
+        let word = strs[i];
+        let dupStr = word;
+        dupStr = dupStr.split('').sort().join('');
+        if (!freq[dupStr]){
+            freq[dupStr] = [i];
+        }else{
+            freq[dupStr].push(i);
+        }
+    }
+    
+    // building the array group
+    const grouped = [];
+    for (let j in freq){
+        const indices = freq[j];
+        const group = [];
+        let k = 0;
+        for (let i of indices){
+            group.push(strs[i]);
+        }
+        grouped.push(group);
+    }
+    return grouped;
+}
+
+
+
