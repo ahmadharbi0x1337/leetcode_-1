@@ -1,0 +1,73 @@
+>>>IDEA: i was aiming at first to solve this one with just a tweak on the 49#_group_anagrams solution code.
+because that problem i also grouped all similar anagrams.
+But after submission, i realized that they said in the problem description and i didn't pay close attention to it.
+they ONLY want to REMOVE the ADJACENT anagrams, so maybe one anagram could be on index 2 and the other on index 4.
+this means that it's okay to leave them, you only want to remove the adjacent ones.
+
+so the appraoch was simply to compare adjacents, it was easier than i though, i just rushed the solution.
+
+so any how, just compare the adjacents string, if the are anagrams don't push the current one, move to the next!. that's it.
+
+
+if you are seeing this before you know what an anagram is or you can't know why i'm using the sort() in this. 
+you can go through this problem first to know: 242#_valid_anagram , in order to know how determine anagrams and why sorting is helpful than re-doing that yourself.
+
+
+
+
+#1 First Submission:[Failed]
+didn't pay a close attention to the adjacent anagram condition!
+
+--Code
+
+
+function removeAnagrams(words) {
+    // Building a dict containing the anagrams alongside the indices of them.
+    let freq = {};
+    let n = words.length;
+    for (let i = 0; i < n; i++){
+        let word = words[i];
+        let dupStr = word;
+        dupStr = dupStr.split('').sort().join('');
+        if (!freq[dupStr]){
+            freq[dupStr] = [i];
+        }else{
+            freq[dupStr].push(i);
+        }
+    }
+
+    // building the array group
+    const grouped = [];
+    for (let j in freq){
+        const indices = freq[j];
+        const distinct = words[indices[0]] 
+        grouped.push(distinct);
+    }
+    return grouped;
+}
+
+
+
+
+#2 Second Submission:[Failed]
+
+
+--Code
+
+function removeAnagrams (words) {
+    let result = [];
+    let n = words.length;
+    for (let i = 0; i < n; i++){
+        if (result.length === 0){
+            result.push(words[i]);
+        }else{
+            let current = words[i];
+            let previous = result[result.length-1];
+            if (current.split('').sort().join('') !== previous.split('').sort().join('')){
+                result.push(current);
+            }
+            // Else Skip The current Word, meaning don't add the adjacent anagram to the result array
+        }
+    }
+    return result;
+}
