@@ -12,7 +12,7 @@
 
 --Code
 
-function(strs) {
+function groupAnagrams (strs) {
     // Building a dict containing the anagrams alongside the indices of them.
     let freq = {};
     let n = strs.length;
