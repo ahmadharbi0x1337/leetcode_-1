@@ -1,0 +1,31 @@
+>>>IDEA: this is a typical binary search algorithm question, the only trick is that to return the index, not the actual target!
+
+i just created a binary_search helper function to do so, because i can't alter the original function giving by the problem to make it accept additinal params.
+
+so we start with the base cases if leftIndex bigger than rightIndex then return -1.
+next base case off-course is that if the middleIndex number is equal to the target then return the middleIndex.
+
+then i used recursion to do the rest!!.
+
+
+
+#1 First Submission:[Success]
+
+
+--Code:
+
+function search(nums, target) {
+	const searchBS = function(nums, left, right, target) {
+		if (left > right) return false -1;
+		let mid = Math.floor((left+right)/2);
+		if (nums[mid] === target) return true;
+
+		if (nums[mid] > target) {
+			return searchBS(nums, left, mid-1, target);
+		}else{
+			return searchBS(nums, mid+1, right, target);
+		}
+	};
+	
+	return searchBS(nums, left, nums.length-1, target);
+}
