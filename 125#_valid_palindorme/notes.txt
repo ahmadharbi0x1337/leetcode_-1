@@ -1,0 +1,44 @@
+>>>IDEA: as per the problem we firstly need to convert the string into lowercase and remove all-non alphanumeric characters.
+so i used replace method, the syntax is a little bit confusing i know!
+so let's break it down
+
+replace(/[^a-zA-Z0-9]/g, '')
+is like replace(char(s)ToReplace, char(s)ToReplaceWith)
+
+chars(s)ToReplace = /[^a-zA-Z0-9]/g
+the slashes /..../ is used to define the pattern literals we want for the Regex.
+the g is used to tell find all, NOT just one and STOP.
+what essentially does is that it tells that the characters we want are NOT in the pattern [a-zA-Z0-9]
+the ^ is used here for Negation, unlike bash shell which is used to define the start of the line.
+
+char(s)ToReplaceWith = ''
+meaning Nothing, so deleting all the non-alphnumberic characters.
+
+Now let's move to the core logic of the problem which is to determine whether the string is a palindrome or not.
+
+the logic is simple, utilizing 2 pointers (leftIndex, rightIndex), left starts from the beginning of the string and right starts from the last.
+and while left < right, just compare the chars, if any chars conclude to be different then immediately return false, indicating that the string is NOT a Palindrome.
+
+
+
+#1 First Submission:[Success]
+
+
+
+
+--Code
+
+function isPalindrome(s) {
+	let str = s.replace(/[^a-zA-Z0-9]/g, '');
+
+	let left = 0;
+	let right = str.length-1;
+	
+	while (left < right) {
+		if (str[left] != str[right]) return false;
+		right--;
+		left++;
+	}
+	return true;
+}
+
