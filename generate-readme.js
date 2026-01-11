@@ -15,9 +15,9 @@ const formatName = (dirName) => {
 };
 let counter = 0;
 const problems = problemDirs.map((d) => {
-	formatName(d.name);
 	counter++;
-});
+	return formatName(d.name);
+i});
 
 const readmeContent = `# 🧠 LeetCode Solutions in JavaScript
 
