@@ -72,6 +72,8 @@ This repository is intended to serve as a learning resource and a showcase of my
 
  [66. Plus One](66%23_plus_one)
 
+ [704. Binary Search](704%23_binary_search)
+
  [73. Set Matrix Zeroes](73%23_set_matrix_zeroes)
 
  [75. Sort Colors](75%23_sort_colors)
