@@ -37,7 +37,7 @@ Each problem has its own directory containing:
 
 This repository is intended to serve as a learning resource and a showcase of my problem-solving skills.
 
-## 📚 Problems List, ${counter} Solved so far.
+## 📚 Problems List, ${counter} Documented so far.
 
 ${problems.map((p) => {
   const encodedDir = encodeURIComponent(p.dir);
