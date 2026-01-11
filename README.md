@@ -70,6 +70,8 @@ This repository is intended to serve as a learning resource and a showcase of my
 
  [49. Group Anagrams](49%23_group_anagrams)
 
+ [507. Perfect Number](507%23_perfect_number)
+
  [66. Plus One](66%23_plus_one)
 
  [704. Binary Search](704%23_binary_search)
