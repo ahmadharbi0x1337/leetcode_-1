@@ -13,8 +13,11 @@ const formatName = (dirName) => {
   const title = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   return { number, title, dir: dirName };
 };
-
-const problems = problemDirs.map(d => formatName(d.name));
+let counter = 0;
+const problems = problemDirs.map((d) => {
+	formatName(d.name);
+	counter++;
+});
 
 const readmeContent = `# 🧠 LeetCode Solutions in JavaScript
 
@@ -34,7 +37,7 @@ Each problem has its own directory containing:
 
 This repository is intended to serve as a learning resource and a showcase of my problem-solving skills.
 
-## 📚 Problems List
+## 📚 Problems List, ${counter} Solved so far.
 
 ${problems.map((p) => {
   const encodedDir = encodeURIComponent(p.dir);
