@@ -16,7 +16,7 @@ Each problem has its own directory containing:
 
 This repository is intended to serve as a learning resource and a showcase of my problem-solving skills.
 
-## 📚 Problems List, 32 Solved so far.
+## 📚 Problems List, 32 Documented so far.
 
  [1. Two Sum](1%23_two_sum)
 
